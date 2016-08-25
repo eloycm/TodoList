@@ -26,6 +26,11 @@ namespace TodoList
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/jqgridcss").Include(
+                      "~/Content/jquery.jqGrid/ui.jqgrid.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqgridmain").Include(
+            "~/Scripts/i18n/grid.locale-en.js", "~/Scripts/jquery.jqGrid.js", "~/Scripts/maingrid.js"));
         }
     }
 }

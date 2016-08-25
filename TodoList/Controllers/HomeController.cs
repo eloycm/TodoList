@@ -15,7 +15,7 @@ namespace TodoList.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Todo List";
 
             return View();
         }
