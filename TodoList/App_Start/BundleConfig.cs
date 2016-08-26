@@ -30,7 +30,7 @@ namespace TodoList
                       "~/Content/jquery.jqGrid/ui.jqgrid.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqgridmain").Include(
-            "~/Scripts/i18n/grid.locale-en.js", "~/Scripts/jquery.jqGrid.js", "~/Scripts/maingrid.js"));
+            "~/Scripts/i18n/grid.locale-en.js", "~/Scripts/jquery.jqGrid.min.js", "~/Scripts/maingrid.js"));
         }
     }
 }
