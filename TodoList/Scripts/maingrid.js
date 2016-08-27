@@ -35,12 +35,20 @@ function gridIni() {
         loadComplete: function () {
             
             $(".jqgrow td input").on("click", function (e) {
-                var id = $(e.target).closest('tr')[0].id;
-                alert('ciao ' + id);
+                var ischecked = $(this).is(':checked');
+                var newid = $(e.target).closest('tr')[0].id;
+
+                $.post("/OnOff/Edit",
+                    { id: newid, newvalue: ischecked },
+                        gridIni
+                    );
+                alert('ciao ' + newid + 'checked' + ischecked);
+
             });
             $(".jqgrow td[title=edit]").on("click", function (e) {
                 var id = $(e.target).closest('tr')[0].id;
-                alert('edit ' + id);
+                //alert('edit ' + id);
+                GetModalEdit("/ToDo/Details/"+id)
             });
             $(".jqgrow td[title=delete]").on("click", function (e) {
                 var id = $(e.target).closest('tr')[0].id;
@@ -61,4 +69,18 @@ function gridIni() {
         $("#tcontainer").empty();
         $("#tcontainer").append('<h3>' + title + '</h3><table id="grid"></table><div id="gridPager"></div>');
     }
+    function GetModalEdit(url) {
+
+        $.get(url, function(data) {
+            $('#todoContainer').html(data);
+
+            $('#todoModal').modal('show');
+        });
+
+    }
+    window.closeModal = function () {
+        $('#todoModal').modal('hide');
+    };
+
+    
 }
