@@ -63,7 +63,7 @@
     });
 
     function PostForm() {
-        var formData = new FormData($('#frm')[0]); // Create an arbitrary FormData instance
+        var formData = new FormData($('#frm')[0]); 
 
         $.ajax(
                 {
@@ -74,7 +74,9 @@
                     processData: false,
                     contentType: false
                 }).done(function () {
+
                     window.parent.closeModal();
+                    gridIni();
                 });
         }
 
