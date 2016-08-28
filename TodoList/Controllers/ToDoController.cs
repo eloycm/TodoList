@@ -61,12 +61,23 @@ namespace TodoList.Controllers
 
         // POST: ToDo/Edit/5
         [HttpPost]
-        public JsonResult Edit(FormCollection collection)
+        public JsonResult Edit(TodoItem collection)
         {
             try
             {
-                // TODO: Add update logic here
+                
 
+                using (var ctx = new ApplicationDbContext())
+                {
+
+                    var q = from r in ctx.TodoItems
+                            where r.ID ==collection.ID
+                            select r;
+
+                    var rs = q.FirstOrDefault();
+                    UpdateModel(rs);
+                    ctx.SaveChanges();
+                }
                 return Json("[]");
             }
             catch
