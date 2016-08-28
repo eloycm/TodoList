@@ -11,11 +11,24 @@ $(document).ready(function () {
 
         GetModalEdit("Todo/Create");
     });
+    $("#deleteall").on("click", function (e) {
+
+        DeleteCompleted();
+    });
+    $('#chkShowAll').change(function () {
+        gridIni();
+    });
 });
-function gridIni() {
+ function gridIni(){
+    var myurl= $("#chkShowAll").is(':checked')?"getlist/paged":"getlist/PagedNonCompleted";
+    gridIniAction(myurl);
+    
+}
+
+function gridIniAction(targeturl) {
     emptygrid("ToDoList");
     $("#grid").jqGrid({
-        url: '/getlist/paged',
+        url: targeturl,
         mtype: "GET",
         datatype: "json",
         jsonReader: { repeatitems: false },
@@ -26,7 +39,7 @@ function gridIni() {
             { label: 'Id', name: 'ID',index: 'ID', key: true, width: 75 },
             { label: 'Title', name: 'Title',index:'Title', width: 150 },
             { label: 'Description', name: 'Description',index:'Description', width: 150 },
-            { label: 'Due on', name: 'DueDate', index: 'DueDate', width: 150, formatter: 'date', formatoptions: { srcformat: 'd/m/Y', newformat: 'd/m/Y' } },
+            { label: 'Due on', name: 'DueDate', index: 'DueDate', width: 150, formatter: 'date', formatoptions: { srcformat: 'm/d/Y', newformat: 'm/d/Y' } },
             {
                 label: 'Completed', name: 'IsCompleted', Index: 'IsCompleted', width: 150, editable: true,
                 edittype: 'checkbox', editoptions: { value: "True:False" },
@@ -47,7 +60,6 @@ function gridIni() {
                     { id: newid, newvalue: ischecked },
                         gridIni
                     );
-                alert('ciao ' + newid + 'checked' + ischecked);
 
             });
             $(".jqgrow td[title=edit]").on("click", function (e) {
@@ -57,7 +69,12 @@ function gridIni() {
             });
             $(".jqgrow td[title=delete]").on("click", function (e) {
                 var id = $(e.target).closest('tr')[0].id;
-                alert('delete ' + id);
+                if (!confirm('are you sure you want to delete this item?'))
+                    return;
+
+                $.post("/ToDo/Delete/"+id, function (data) {
+                    gridIni();
+                });
             });
            
         }
@@ -87,4 +104,13 @@ function GetModalEdit(url) {
 }
 window.closeModal = function () {
     $('#todoModal').modal('hide');
-};
+}
+function DeleteCompleted()
+{
+    if (!confirm('are you sure you want to delete all completed items?'))
+        return;
+    $.post("/ToDo/DeleteAllCompletedTasks", function (data) {
+        gridIni();
+    });
+
+}

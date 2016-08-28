@@ -42,5 +42,22 @@ namespace TodoList.Controllers
 
             }
         }
+        public JsonResult PagedNonCompleted(jqGridViewModel vm)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var nRecords = ctx.TodoItems.Count();
+
+                var q = (from r in ctx.TodoItems
+                         where !r.IsCompleted
+                         orderby r.DueDate descending
+                         select r).ToPagedList(vm.page, vm.rows);
+
+                PagedResults<TodoItem> rs = q.ToList().ToPagedObject(vm.page, vm.rows, nRecords);
+
+                return GetJsonResult(rs, JsonRequestBehavior.AllowGet);
+
+            }
+        }
     }
 }

@@ -95,26 +95,55 @@ namespace TodoList.Controllers
             }
         }
 
-        // GET: ToDo/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ToDo/Delete/5
+        // post: ToDo/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public JsonResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                using (var ctx = new ApplicationDbContext())
+                {
 
-                return RedirectToAction("Index");
+                    var q = from r in ctx.TodoItems
+                            where r.ID == id
+                            select r;
+
+                    var rs = q.FirstOrDefault();
+                    ctx.TodoItems.Remove(rs);
+                    ctx.SaveChanges();
+                }
+                return Json("[]");
             }
             catch
             {
-                return View();
+                return Json("[]"); ;
             }
         }
+        [HttpPost]
+        public JsonResult DeleteAllCompletedTasks()
+        {
+            try
+            {
+                using (var ctx = new ApplicationDbContext())
+                {
+
+                    var q = from r in ctx.TodoItems
+                            where r.IsCompleted
+                            select r;
+
+                    var rs = q.ToList();
+
+                    ctx.TodoItems.RemoveRange(rs);
+                    ctx.SaveChanges();
+                }
+                return Json("[]");
+            }
+            catch
+            {
+                return Json("[]"); ;
+            }
+        }
+
+       
     }
 }
