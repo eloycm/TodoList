@@ -466,6 +466,7 @@
     <Content Include="Views\ToDo\Details.cshtml" />
     <Content Include="Views\ToDo\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_DialogLayout.cshtml" />
+    <Content Include="Views\Shared\CloseModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

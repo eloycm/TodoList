@@ -1,6 +1,6 @@
 ﻿@model TodoList.Models.TodoItem
 
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("Edit","ToDo",new AjaxOptions() { UpdateTargetId = "ToDo", HttpMethod = "Post", },new { name = "frm",id="frm" }))
 {
     @Html.AntiForgeryToken()
     
@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="button" value="Save" class="btn btn-default" onclick="PostForm();"  />
             </div>
         </div>
     </div>
@@ -61,4 +61,21 @@
             format: 'mm-dd-yyyy'
         }); 
     });
+
+    function PostForm() {
+        var formData = new FormData($('#frm')[0]); // Create an arbitrary FormData instance
+
+        $.ajax(
+                {
+                    url: '/Todo/Edit',
+                    type: "POST",
+                    async: true,
+                    data: formData,
+                    processData: false,
+                    contentType: false
+                }).done(function () {
+                    window.parent.closeModal();
+                });
+        }
+
 </script>

@@ -39,17 +39,17 @@ namespace TodoList.Controllers
 
         // POST: ToDo/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public string Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                return "thank you!";
             }
             catch
             {
-                return View();
+                return "Error";
             }
         }
 
@@ -61,17 +61,17 @@ namespace TodoList.Controllers
 
         // POST: ToDo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public JsonResult Edit(FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return Json("[]");
             }
             catch
             {
-                return View();
+                return  Json("[]"); ;
             }
         }
 
