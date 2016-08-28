@@ -34,6 +34,8 @@ namespace TodoList
 
             bundles.Add(new ScriptBundle("~/bundles/jqgridmain").Include(
             "~/Scripts/i18n/grid.locale-en.js", "~/Scripts/jquery.jqGrid.min.js", "~/Scripts/maingrid.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/jqueryval").Include(
+               "~/Scripts/jquery.validate.min.js", "~/Scripts/jquery.validate.unobtrusive.min.js"));
         }
     }
 }

@@ -6,6 +6,11 @@ $(document).ready(function () {
     $(".jqgrow td input").on("click",function () {
         alert('ciao');
     });
+
+    $("#insertlink").on("click", function (e) {
+
+        GetModalEdit("Todo/Create");
+    });
 });
 function gridIni() {
     emptygrid("ToDoList");
@@ -54,7 +59,7 @@ function gridIni() {
                 var id = $(e.target).closest('tr')[0].id;
                 alert('delete ' + id);
             });
-            //td[title=Herbert]'
+           
         }
     });
     function editLink(cellValue, options, rowdata, action) {
@@ -69,18 +74,17 @@ function gridIni() {
         $("#tcontainer").empty();
         $("#tcontainer").append('<h3>' + title + '</h3><table id="grid"></table><div id="gridPager"></div>');
     }
-    function GetModalEdit(url) {
-
-        $.get(url, function(data) {
-            $('#todoContainer').html(data);
-
-            $('#todoModal').modal('show');
-        });
-
-    }
-    window.closeModal = function () {
-        $('#todoModal').modal('hide');
-    };
-
-    
+      
 }
+function GetModalEdit(url) {
+
+    $.get(url, function (data) {
+        $('#todoContainer').html(data);
+
+        $('#todoModal').modal('show');
+    });
+
+}
+window.closeModal = function () {
+    $('#todoModal').modal('hide');
+};

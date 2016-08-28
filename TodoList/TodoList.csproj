@@ -425,6 +425,7 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\maingrid.js" />
+    <Content Include="Scripts\ModalForm.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -467,6 +468,7 @@
     <Content Include="Views\ToDo\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_DialogLayout.cshtml" />
     <Content Include="Views\Shared\CloseModal.cshtml" />
+    <Content Include="Views\ToDo\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

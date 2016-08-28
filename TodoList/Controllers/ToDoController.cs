@@ -34,22 +34,31 @@ namespace TodoList.Controllers
         // GET: ToDo/Create
         public ActionResult Create()
         {
-            return View();
+            var rs = new TodoItem();
+            rs.DueDate = DateTime.Now;
+            return PartialView("/views/todo/Create.cshtml",rs);
         }
 
         // POST: ToDo/Create
         [HttpPost]
-        public string Create(FormCollection collection)
+        public JsonResult Create(TodoItem collection)
         {
             try
             {
-                // TODO: Add insert logic here
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var newItem = new TodoItem();
 
-                return "thank you!";
+
+                    UpdateModel(newItem);
+                    ctx.TodoItems.Add(newItem);
+                    ctx.SaveChanges();
+                }
+                return Json("[]");
             }
             catch
             {
-                return "Error";
+                return Json("[]");
             }
         }
 
