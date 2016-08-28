@@ -31,14 +31,15 @@ function gridIniAction(targeturl) {
         url: targeturl,
         mtype: "GET",
         datatype: "json",
+        styleUI : 'Bootstrap',
         jsonReader: { repeatitems: false },
 
         colModel: [
-            { name: 'edit', search: false, index: 'ID', width: 30, sortable: false, formatter: editLink },
-            { name: 'delete', search: false, index: 'ID', width: 35, sortable: false, formatter: deleteLink },
-            { label: 'Id', name: 'ID',index: 'ID', key: true, width: 75 },
-            { label: 'Title', name: 'Title',index:'Title', width: 150 },
-            { label: 'Description', name: 'Description',index:'Description', width: 150 },
+            { label:'',name: 'edit', search: false, index: 'ID',align: 'center', cellsalign: 'center', width: 60, sortable: false, formatter: editLink },
+            {  label:'',name: 'delete', search: false, index: 'ID', align: 'center', cellsalign: 'center', width: 60, sortable: false, formatter: deleteLink },
+            { label: 'Id', name: 'ID',index: 'ID', key: true, width: 30 },
+            { label: 'Title', name: 'Title',index:'Title', width: 250 },
+            { label: 'Description', name: 'Description',index:'Description', width: 350 },
             { label: 'Due on', name: 'DueDate', index: 'DueDate', width: 150, formatter: 'date', formatoptions: { srcformat: 'm/d/Y', newformat: 'm/d/Y' } },
             {
                 label: 'Completed', name: 'IsCompleted', Index: 'IsCompleted', width: 150, editable: true,

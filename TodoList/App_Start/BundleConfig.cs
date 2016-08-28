@@ -30,7 +30,7 @@ namespace TodoList
                       "~/Content/bootstrap-datepicker.css"));
 
             bundles.Add(new StyleBundle("~/Content/jqgridcss").Include(
-                      "~/Content/jquery.jqGrid/ui.jqgrid.css"));
+                      "~/Content/jquery.jqGrid/ui.jqgrid-bootstrap.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqgridmain").Include(
             "~/Scripts/i18n/grid.locale-en.js", "~/Scripts/jquery.jqGrid.min.js", "~/Scripts/maingrid.js"));
