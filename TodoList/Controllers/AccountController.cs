@@ -13,7 +13,7 @@ using TodoList.Models;
 namespace TodoList.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -79,6 +79,7 @@ namespace TodoList.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                   
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

@@ -7,20 +7,25 @@
     <p class="lead">task management application</p>
     
 </div>
+@if (User.Identity != null &&  User.Identity.IsAuthenticated)
+{
+    <div>
+        <div id="tcontainer">
 
-<div id="tcontainer">
-    <table id="grid"></table>
-    <div id="gridPager"></div>
-    
-</div>
-<br />
-<a href="#" id="insertlink" >Add new item</a>
-<br/>
-<a href="#" id="deleteall">Delete all completed tasks</a>
-<br />
-<input type="checkbox" id="chkShowAll" checked/>Show completed Items
+            <table id="grid"></table>
+            <div id="gridPager"></div>
 
+        </div>
 
+        <br />
+        <a href="#" id="insertlink">Add new item</a>
+        <br />
+        <a href="#" id="deleteall">Delete all completed tasks</a>
+        <br />
+        <input type="checkbox" id="chkShowAll" checked />Show completed Items
+        <br />
+    </div>
+}
 <div id="todoModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
