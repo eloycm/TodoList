@@ -3,7 +3,7 @@
 @using (Html.BeginForm("Create", "ToDo", FormMethod.Post, new { name = "frm", id = "frm" }))
 {
     @Html.AntiForgeryToken()
-    
+    <input type="hidden" value="@Model.ApplicationUserID" name="ApplicationUserID" />
     <div class="form-horizontal">
         <h4>TodoItem</h4>
         <hr />

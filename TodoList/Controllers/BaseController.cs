@@ -9,6 +9,18 @@ namespace TodoList.Controllers
 {
     public class BaseController:Controller
     {
+        protected string UserId
+        {
+            get
+            {
+                if (Session["UserId"] != null)
+                    return Session["UserId"].ToString();
+                var uId = GetUserId();
+                Session["UserId"] = uId;
+
+                return uId;
+            }
+        }
         protected JsonResult GetJsonResult(object data, JsonRequestBehavior requestBehavior)
         {
             return new JsonResult()
@@ -20,6 +32,22 @@ namespace TodoList.Controllers
                 MaxJsonLength = int.MaxValue
             };
 
+
+        }
+        protected string GetUserId()
+        {
+
+
+            using (var ctx = new Models.ApplicationDbContext())
+            {
+                var q = from u in ctx.Users
+                        where User.Identity.Name == u.Email
+                        select u;
+
+                var rs = q.FirstOrDefault();
+
+                return rs == null ? string.Empty : rs.Id;
+            }
         }
     }
 }

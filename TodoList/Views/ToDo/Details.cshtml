@@ -3,7 +3,7 @@
 @using (Ajax.BeginForm("Edit","ToDo",new AjaxOptions() { UpdateTargetId = "ToDo", HttpMethod = "Post"},new { name = "frm",id="frm" }))
 {
     @Html.AntiForgeryToken()
-    
+    <input type="hidden" value="@Model.ApplicationUserID" name="ApplicationUserID" />
     <div class="form-horizontal">
         <h4>TodoItem</h4>
         <hr />

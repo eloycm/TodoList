@@ -7,7 +7,8 @@ using TodoList.Models;
 
 namespace TodoList.Controllers
 {
-    public class ToDoController : Controller
+    [Authorize]
+    public class ToDoController : BaseController
     {
         // GET: ToDo
         public ActionResult Index()
@@ -35,6 +36,7 @@ namespace TodoList.Controllers
         public ActionResult Create()
         {
             var rs = new TodoItem();
+            rs.ApplicationUserID = UserId;
             rs.DueDate = DateTime.Now;
             return PartialView("/views/todo/Create.cshtml",rs);
         }

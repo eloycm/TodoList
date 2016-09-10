@@ -10,14 +10,18 @@ using X.PagedList;
 
 namespace TodoList.Controllers
 {
+    [Authorize]
     public class GetListController : BaseController
     {
         // GET: GetList
         public JsonResult Index()
         {
+            
+
             using (var ctx = new ApplicationDbContext())
             {
                 var q = from r in ctx.TodoItems
+                        where r.ApplicationUserID==UserId
                         orderby r.DueDate descending
                         select r;
 
@@ -30,9 +34,10 @@ namespace TodoList.Controllers
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var nRecords = ctx.TodoItems.Count();
+                var nRecords = ctx.TodoItems.Count( r=>r.ApplicationUserID==UserId);
 
                 var q = (from r in ctx.TodoItems
+                         where r.ApplicationUserID==UserId
                         orderby r.DueDate descending
                         select r).ToPagedList(vm.page,vm.rows);
 
